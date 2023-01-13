@@ -3,15 +3,16 @@ kind: PersistentVolume
 metadata:
   name: grafana
   labels:
+    name: grafana
     type: local
 spec:
-  storageClassName: longhorn
   capacity:
     storage: 128Gi
-  volumeMode: Block
+  volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-storage
   local:
     path: /dev/mapper/data-grafana
   nodeAffinity:
@@ -21,4 +22,20 @@ spec:
           - key: kubernetes.io/hostname
             operator: In
             values:
-              - columbo
+              - k3os-6802
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: grafana-pvc
+spec:
+  storageClassName: local-storage
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 128Gi
+  selector:
+    matchLabels:
+      name: "grafana"
