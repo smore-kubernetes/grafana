@@ -25,7 +25,7 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
             - name: GF_SERVER_ROOT_URL
-              value: "http://k3os-6802/grafana"
+              value: "http://k3os-6802/grafana/"
             - name: GF_SERVER_SERVE_FROM_SUB_PATH
               value: "true"
           ports:
