@@ -28,6 +28,10 @@ spec:
               value: "http://k3os-6802/grafana/"
             - name: GF_SERVER_SERVE_FROM_SUB_PATH
               value: "true"
+            - name: GF_SERVER_LOG_MODE
+              value: "console file"
+            - name: GF_LOG_LEVEL
+              value: "debug"
           ports:
             - containerPort: 3000
               name: http-grafana
